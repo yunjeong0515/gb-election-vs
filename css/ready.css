@@ -1,0 +1,25 @@
+.ready-body {
+  position: relative;
+  background: url('../images/ready/bg.jpg') no-repeat center/ cover;
+}
+
+
+.count_wrap {
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  width: 20%;
+  transform: translate(-50%, -50%);
+}
+
+.count_wrap img{
+  position: absolute;
+  width: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.count_wrap img.active {
+  opacity: 1;
+}

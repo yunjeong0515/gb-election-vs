@@ -1,0 +1,48 @@
+.character-body {
+  background: url('../images/character/bg.jpg') no-repeat center/ cover;
+}
+
+.character-wrap {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 25% 0 18% 0;
+}
+
+.character-wrap .character-intro {
+  width: 85%;
+  margin-bottom: 5%;
+}
+.character-wrap .character-intro.ttora {
+  width: 83%;
+}
+.character-wrap .character-intro svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.character-wrap .info-wrap {
+  width: 78%;
+  margin-bottom: 3%;
+}
+.character-wrap .info-wrap img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.character-wrap .btn-wrap {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 0 6%;
+}
+.character-wrap .btn-wrap .next-btn {
+  width: 15%;
+}
+.character-wrap .btn-wrap .next-btn img {
+  width: 100%;
+  object-fit: contain;
+}
