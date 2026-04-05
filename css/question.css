@@ -1,3 +1,94 @@
 .question-body {
   background: url('../images/question/bg.jpg') no-repeat center/ cover;
 }
+
+.question-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 5%;
+  padding: 15% 3%;
+  width: 94%;
+  height: 100vh;
+  margin: 0 auto;
+}
+.question-title {
+  width: 100%;
+}
+.question-title img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.vs-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14%;
+}
+.vs-container .choice-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 43%;
+  padding: 3% 0 5% 0;
+}
+.vs-container .choice-wrap .character-wrap {
+  width: 100%;
+  margin-bottom: 5%;
+}
+.vs-container .choice-wrap .character-wrap img {
+  width: 100%;
+  object-fit: contain;
+}
+.vs-container .choice-wrap .text {
+  width: 100%;
+  margin-bottom: 5%;
+}
+.vs-container .choice-wrap .text img {
+  width: 100%;
+  object-fit: contain;
+}
+.vs-container .choice-wrap .checkbox {
+  position: relative;
+  width: 70%;
+  background: transparent;
+  border: 0;
+}
+.vs-container .choice-wrap .checkbox img {
+  width: 100%;
+  object-fit: contain;
+}
+.vs-container .choice-wrap .checkbox .check-icon {
+  position: absolute;
+  z-index: 10;
+  opacity: 0;
+}
+.vs-container .choice-wrap.inactive {
+  opacity: 0.4;
+}
+.vs-container .choice-wrap.active .checkbox .check-icon {
+  opacity: 1;
+}
+.vs-container .choice-wrap.disabled {
+  pointer-events: none;
+}
+.vs-wrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 24%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  background: url(../images/question/bar.png) no-repeat center center / contain;
+}
+.vs-wrap .vs-icon {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+}
+.vs-wrap .vs-icon img {
+  width: 100%;
+  object-fit: contain;
+}

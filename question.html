@@ -2,48 +2,58 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>VS 게임</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VS 질문</title>
 
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/question.css">
 </head>
-
 <body class="question-body">
+
   <main class="question-wrap">
-
     <!-- 질문 -->
-    <h2 class="q-title"></h2>
-
-    <!-- 선택 영역 -->
-    <div class="q-content">
-
-      <!-- 왼쪽 -->
-      <div class="choice left">
-        <img class="character" />
-        <p class="text"></p>
-
-        <div class="select-box">
-          <div class="check"></div>
-        </div>
-      </div>
-
-      <!-- VS -->
-      <div class="vs">VS</div>
-
-      <!-- 오른쪽 -->
-      <div class="choice right">
-        <img class="character" />
-        <p class="text"></p>
-
-        <div class="select-box">
-          <div class="check"></div>
-        </div>
-      </div>
-
+    <div class="question-title">
+      <img id="questionImg" src="images/question/q_01.png" alt="">
     </div>
 
-  </main>
+    <div class="vs-container">
 
+      <!-- 왼쪽 -->
+      <div class="choice-wrap left" data-choice="left">
+        <div class="character-wrap">
+          <img src="images/question/juisoon.png" alt="쥐순" />
+        </div>
+        <div class="text">
+          <img id="leftImg" src="images/question/q_01_a.png" alt="">
+        </div>
+        <button class="checkbox">
+          <img class="check-icon" src="images/question/check_icon.png" alt="check">
+          <img src="images/question/left_checkbox.png" alt="checkbox">
+        </button>
+      </div>
+      <!-- VS -->
+      <div class="vs-wrap">
+        <div class="vs-icon">
+          <img src="images/question/vs.png" alt="vs">
+        </div>
+      </div>
+      <!-- 오른쪽 -->
+      <div class="choice-wrap right" data-choice="right">
+        <div class="character-wrap">
+          <img src="images/question/ttora.png" alt="또라" />
+        </div>
+        <div class="text">
+          <img id="rightImg" src="images/question/q_01_b.png" alt="">
+        </div>
+        <button class="checkbox">
+          <img class="check-icon" src="images/question/check_icon.png" alt="check">
+          <img src="images/question/left_checkbox.png" alt="checkbox">
+        </button>
+      </div>
+    </div>
+
+    </div>
+  </main>
   <script src="js/question.js"></script>
 </body>
 </html>

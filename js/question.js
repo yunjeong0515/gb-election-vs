@@ -1,94 +1,60 @@
-// 👉 질문 데이터
-const questions = [
-  {
-    title: "탕수육을 먹을 때 당신은?",
-    left: {
-      text: "나는 무조건 찍먹파!",
-      img: "../images/mouse.png",
-      type: "A"
-    },
-    right: {
-      text: "나는 무조건 부먹파!",
-      img: "../images/rabbit.png",
-      type: "B"
-    }
-  },
-  {
-    title: "치킨을 먹을 때 당신은?",
-    left: {
-      text: "바삭한 후라이드!",
-      img: "../images/mouse.png",
-      type: "A"
-    },
-    right: {
-      text: "달달한 양념!",
-      img: "../images/rabbit.png",
-      type: "B"
-    }
-  }
-  // 👉 총 5개 넣으면 끝
-];
+const total = 5;
+let current = 1;
 
-let current = 0;
+const questionImg = document.getElementById('questionImg');
+const leftImg = document.getElementById('leftImg');
+const rightImg = document.getElementById('rightImg');
 
-// 👉 점수 저장
-let score = {
-  A: 0,
-  B: 0
-};
+const choices = document.querySelectorAll('.choice-wrap');
+let answers = [];
 
-// 👉 질문 렌더링
-function renderQuestion() {
-  const q = questions[current];
+choices.forEach(choice => {
+  choice.addEventListener('click', () => {
 
-  document.querySelector('.q-title').innerText = q.title;
-
-  document.querySelector('.left .text').innerText = q.left.text;
-  document.querySelector('.left .character').src = q.left.img;
-
-  document.querySelector('.right .text').innerText = q.right.text;
-  document.querySelector('.right .character').src = q.right.img;
-
-  // 체크 초기화
-  document.querySelectorAll('.select-box').forEach(el => {
-    el.classList.remove('active');
-  });
-}
-
-// 👉 선택 이벤트
-document.querySelectorAll('.choice').forEach((el, index) => {
-  el.addEventListener('click', () => {
-
-    const q = questions[current];
-
-    // 체크 표시
-    document.querySelectorAll('.select-box').forEach(box => {
-      box.classList.remove('active');
+    // 전체 초기화
+    choices.forEach(c => {
+      c.classList.remove('active', 'inactive');
     });
 
-    el.querySelector('.select-box').classList.add('active');
+    // 선택된 것 표시
+    choice.classList.add('active');
 
-    // 점수 누적
-    if (index === 0) {
-      score[q.left.type]++;
-    } else {
-      score[q.right.type]++;
-    }
+    // 선택 안된 것 표시
+    choices.forEach(c => {
+      if (c !== choice) c.classList.add('inactive');
+    });
 
-    // 다음 질문
+    // 한 번 선택되면 더 이상 클릭 막기
+    choices.forEach(c => c.classList.add('disabled'));
+
+    const selected = choice.dataset.choice;
+    answers.push({ question: current, answer: selected });
+
     setTimeout(() => {
-      current++;
+      nextQuestion();
 
-      if (current < questions.length) {
-        renderQuestion();
-      } else {
-        // 👉 결과 페이지 이동 + 데이터 전달
-        localStorage.setItem('result', JSON.stringify(score));
-        location.href = 'result.html';
-      }
-    }, 400);
+      // 다음 문제 넘어갈 때 초기화
+      choices.forEach(c => {
+        c.classList.remove('active', 'inactive', 'disabled');
+      });
+    }, 1500);
   });
 });
 
-// 시작
-renderQuestion();
+function nextQuestion() {
+  current++;
+
+  if (current > total) {
+    console.log(answers);
+    window.location.href = 'result.html';
+    return;
+  }
+
+  updateUI();
+}
+
+function updateUI() {
+  questionImg.src = `images/question/q_0${current}.png`;
+  leftImg.src = `images/question/q_0${current}_a.png`;
+  rightImg.src = `images/question/q_0${current}_b.png`;
+}
