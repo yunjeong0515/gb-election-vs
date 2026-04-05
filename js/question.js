@@ -8,48 +8,41 @@ const rightImg = document.getElementById('rightImg');
 const choices = document.querySelectorAll('.choice-wrap');
 let answers = [];
 
+// 클릭 이벤트
 choices.forEach(choice => {
   choice.addEventListener('click', () => {
 
     // 전체 초기화
-    choices.forEach(c => {
-      c.classList.remove('active', 'inactive');
-    });
+    choices.forEach(c => c.classList.remove('active', 'inactive'));
 
-    // 선택된 것 표시
+    // 선택 표시
     choice.classList.add('active');
+    choices.forEach(c => { if(c !== choice) c.classList.add('inactive'); });
 
-    // 선택 안된 것 표시
-    choices.forEach(c => {
-      if (c !== choice) c.classList.add('inactive');
-    });
-
-    // 한 번 선택되면 더 이상 클릭 막기
-    choices.forEach(c => c.classList.add('disabled'));
-
-    const selected = choice.dataset.choice;
+    // 선택값 저장
+    const selected = choice.dataset.choice; // 'left' 또는 'right'
     answers.push({ question: current, answer: selected });
+
+    // 다음 문제로 넘어가기 전 클릭 막기
+    choices.forEach(c => c.classList.add('disabled'));
 
     setTimeout(() => {
       nextQuestion();
-
-      // 다음 문제 넘어갈 때 초기화
-      choices.forEach(c => {
-        c.classList.remove('active', 'inactive', 'disabled');
-      });
-    }, 1500);
+      // 다음 문제 초기화
+      choices.forEach(c => c.classList.remove('active', 'inactive', 'disabled'));
+    }, 800);
   });
 });
 
 function nextQuestion() {
   current++;
-
-  if (current > total) {
-    console.log(answers);
+  if(current > total){
+    // ✅ localStorage에 저장
+    localStorage.setItem('answers', JSON.stringify(answers));
+    // 결과 페이지 이동
     window.location.href = 'result.html';
     return;
   }
-
   updateUI();
 }
 

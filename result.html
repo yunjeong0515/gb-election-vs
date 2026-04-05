@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VS 게임 - 결과</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/result.css">
+</head>
+<body class="result-body">
+  <main class="result-wrap">
+      <!-- 1. 최종 결과 박스 -->
+      <div class="result-box">
+        <!-- 1-1. 투표 도장 아이콘 (항상 동일) -->
+        <div class="stamp-wrap">
+          <img src="images/result/stamp.png" alt="투표 도장">
+        </div>
+        <div class="result-text" id="finalResultText"></div>
+      </div>
+
+      <!-- 2. 결과 캐릭터 -->
+      <div class="result-character">
+        <img id="characterImg" src="images/result/character.png" alt="캐릭터">
+      </div>
+
+      <!-- 3. 상세 텍스트 (각 문항 선택에 따라 다름) -->
+      <div class="detail-text font_aone" id="detailText"></div>
+
+
+  </main>
+  <script>
+
+// localStorage에서 answers 가져오기
+const storedAnswers = localStorage.getItem('answers');
+const answers = storedAnswers ? JSON.parse(storedAnswers) : [];
+
+// a/b 개수 세기 (left → a, right → b)
+let aCount = answers.filter(item => item.answer === 'left').length;
+let bCount = answers.filter(item => item.answer === 'right').length;
+
+// 최종 결과 이미지 표시
+const finalResultText = document.getElementById('finalResultText');
+const characterImg = document.getElementById('characterImg');
+
+if(aCount > bCount){
+  finalResultText.innerHTML = `<img src="images/result/result_a.png" alt="A 유형">`;
+  characterImg.src = 'images/result/character_a.png';
+} else {
+  finalResultText.innerHTML = `<img src="images/result/result_b.png" alt="B 유형">`;
+  characterImg.src = 'images/result/character_b.png';
+}
+
+// 각 문항별 상세 텍스트
+const detailMessages = {
+  1: { left: '탕수육은 무조건 찍먹파!', right: '탕수육은 무조건 부먹파!' },
+  2: { left: '치킨은 바삭한 후라이드지!', right: '치킨은 달달한 양념이지!' },
+  3: { left: '비.. 조금 있으면 그치지 않을까..?', right: '그렇게 사게된 우산만 어느새 5개째..' },
+  4: { left: '여행가면 시간 단위로 계획 세우기', right: '오늘 가고 싶은 곳은 오늘의 나에게!' },
+  5: { left: '문자 안보네.. 신경이 쓰여...', right: '문자는.. 내가 더 안 봐 사실' }
+};
+
+const detailText = document.getElementById('detailText');
+let detailHTML = '';
+
+// 각 문항별 선택값을 가져와서 문구 표시
+answers.forEach(item => {
+  detailHTML += `<p>문항 ${item.question}: ${detailMessages[item.question][item.answer]}</p>`;
+});
+
+detailText.innerHTML = detailHTML;
+  </script>
+</body>
+</html>

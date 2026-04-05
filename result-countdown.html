@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VS 게임</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/countdown.css">
+</head>
+<body class="countdown-body">
+  <main class="countdown-wrap">
+    <div class="count-wrap">
+      <img id="countImg" src="images/countdown/count_03.png" alt="3초 전">
+    </div>
+  </main>
+
+  <script>
+    const images = [
+      'images/countdown/count_03.png',
+      'images/countdown/count_02.png',
+      'images/countdown/count_01.png',
+      'images/countdown/count_00.png'
+    ];
+    let index = 0;
+    const countImg = document.getElementById('countImg');
+
+
+    setTimeout(() => {
+
+      countImg.classList.add('pulse-animation');
+
+      const timer = setInterval(() => {
+        index++;
+        if(index < images.length){
+          countImg.src = images[index];
+        } else {
+          clearInterval(timer);
+          window.location.href = 'result.html';
+        }
+      }, 1000);
+    }, 1000);
+    </script>
+</body>
+</html>

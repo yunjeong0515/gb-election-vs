@@ -1,0 +1,29 @@
+.countdown-body {
+  background: url('../images/countdown/bg.jpg') no-repeat center/ cover;
+}
+.countdown-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.countdown-wrap .count-wrap {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+}
+.countdown-wrap .count-wrap img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.pulse-animation {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}

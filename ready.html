@@ -14,34 +14,35 @@
       <img class="count_img" src="" alt="">
     </div>
   </main>
+  <script>
+    const numbers = [5,4,3,2,1,0];
+    let index = 0;
+
+    const imgEl = document.querySelector('.count_img');
+
+    setTimeout(() => {
+      showNext();
+    }, 400);
+
+    function showNext() {
+      imgEl.classList.remove('active');
+
+      setTimeout(() => {
+        imgEl.src = `../images/ready/count_0${numbers[index]}.png`;
+        imgEl.classList.add('active');
+        index++;
+
+        if (index < numbers.length) {
+          setTimeout(showNext, 800);
+        } else {
+          setTimeout(() => {
+            window.location.href = '/question.html';
+          }, 800);
+        }
+      }, 100);
+    }
+  </script>
 </body>
 </html>
 
-<script>
-  const numbers = [5,4,3,2,1,0];
-  let index = 0;
 
-  const imgEl = document.querySelector('.count_img');
-
-  setTimeout(() => {
-    showNext();
-  }, 400);
-
-  function showNext() {
-    imgEl.classList.remove('active');
-
-    setTimeout(() => {
-      imgEl.src = `../images/ready/count_0${numbers[index]}.png`;
-      imgEl.classList.add('active');
-      index++;
-
-      if (index < numbers.length) {
-        setTimeout(showNext, 800);
-      } else {
-        setTimeout(() => {
-          window.location.href = '/question.html';
-        }, 800);
-      }
-    }, 100);
-  }
-  </script>
