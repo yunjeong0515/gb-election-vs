@@ -8,20 +8,83 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  margin: 25% 0 18% 0;
+  margin: 22% 0 18% 0;
 }
 
 .character-wrap .character-intro {
+  position: relative;
   width: 85%;
-  margin-bottom: 5%;
+  aspect-ratio: 115 / 95  ;
+  margin-bottom: 7%;
 }
-.character-wrap .character-intro.ttora {
-  width: 83%;
-}
-.character-wrap .character-intro svg {
+.character-wrap .character-intro img {
+  position: absolute;
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+.character-wrap .character-intro img.character {
+  position: absolute;
+  z-index: 5;
+}
+.character-wrap .character-intro img.greetings {
+  position: absolute;
+  z-index: 10;
+}
+.character-wrap .character-intro img.subtext {
+  position: absolute;
+  z-index: 10;
+}
+
+.character-wrap .character-intro.juisoon img.character {
+  animation: bounceDown 1.8s infinite ease-in-out;
+  transform-origin: bottom center;
+}
+
+@keyframes bounceDown {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(4%) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(2.5%) rotate(0deg);
+  }
+  75% {
+    transform: translateY(4%) rotate(2deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+.character-wrap .character-intro.ttora img.character {
+  animation: balance 2s infinite ease-in-out;
+  transform-origin: 60% 100%;
+}
+
+@keyframes balance {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-4deg);
+  }
+  40% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  60% {
+    transform: rotate(2deg);
+  }
+  80% {
+    transform: rotate(4deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .character-wrap .info-wrap {

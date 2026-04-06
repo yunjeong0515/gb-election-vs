@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VS 게임</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/end.css">
+</head>
+<body class="end-body">
+
+  <script>
+    setTimeout(() => {
+      // 기존 답변 초기화
+      localStorage.removeItem('answers');
+
+      window.location.href = 'index.html';
+    }, 5000);
+  </script>
+</body>
+</html>

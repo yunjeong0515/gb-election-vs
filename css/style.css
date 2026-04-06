@@ -16,6 +16,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
@@ -29,7 +30,8 @@ body {
 .font_aone {
   font-family: 'AONE', sans-serif;
 }
-img {
+img,
+.svg{
   display: block;
   -webkit-user-drag: none;
   user-select: none;

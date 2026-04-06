@@ -31,7 +31,7 @@
   margin: 0 auto;
 }
 .main .main-bubble {
-  width: 95%;
+  width: 87%;
   aspect-ratio: 441 / 398;
   margin: 0 auto;
 }
@@ -56,7 +56,7 @@
 .footer {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   width: 92%;
   margin: 0 auto;
   gap: 1%;
@@ -67,7 +67,7 @@
   width: 18%;
   transform-origin: bottom center;
   /* transition: transform 0.2s ease; */
-  animation: leverMove 1s ease-in-out infinite;
+  /* animation: leverMove 1.2s ease-in-out infinite; */
 }
 .footer .center {
   width: 44%;
@@ -75,15 +75,28 @@
   border: none;
   background: none;
   cursor: pointer;
-}
-.footer .center:active {
-  transform: scale(0.95);
+  animation: pressEffect 1.2s infinite ease-in-out;
+  transform-origin: center;
 }
 
-
+@keyframes pressEffect {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.9) translateY(2px);
+  }
+  60% {
+    transform: scale(0.92) translateY(1px);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
 .footer .right {
   width: 27%;
+  margin-bottom: 5%;
 }
 .footer .left svg,
 .footer .center svg,

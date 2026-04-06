@@ -22,24 +22,29 @@
       'images/countdown/count_01.png',
       'images/countdown/count_00.png'
     ];
+
     let index = 0;
     const countImg = document.getElementById('countImg');
 
+    window.addEventListener('load', () => {
 
-    setTimeout(() => {
+      setTimeout(() => {
 
-      countImg.classList.add('pulse-animation');
+        countImg.classList.add('pulse-animation');
 
-      const timer = setInterval(() => {
-        index++;
-        if(index < images.length){
-          countImg.src = images[index];
-        } else {
-          clearInterval(timer);
-          window.location.href = 'result.html';
-        }
-      }, 1000);
-    }, 1000);
-    </script>
+        const timer = setInterval(() => {
+          index++;
+          if(index < images.length){
+            countImg.src = images[index];
+          } else {
+            clearInterval(timer);
+            window.location.href = 'result.html';
+          }
+        }, 1000);
+
+      }, 500);
+
+    });
+  </script>
 </body>
 </html>

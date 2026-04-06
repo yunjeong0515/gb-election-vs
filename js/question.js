@@ -1,3 +1,7 @@
+window.addEventListener('load', () => {
+  playAnimation();
+});
+
 const total = 5;
 let current = 1;
 
@@ -37,17 +41,34 @@ choices.forEach(choice => {
 function nextQuestion() {
   current++;
   if(current > total){
-    // ✅ localStorage에 저장
+
     localStorage.setItem('answers', JSON.stringify(answers));
-    // 결과 페이지 이동
-    window.location.href = 'result.html';
+
+    window.location.href = 'result-countdown.html';
     return;
   }
   updateUI();
+}
+
+function playAnimation(){
+  const title = document.querySelector('.question-title');
+  const vs = document.querySelector('.vs-container');
+
+
+  title.classList.remove('show');
+  vs.classList.remove('show');
+
+
+  void title.offsetWidth;
+
+  setTimeout(() => title.classList.add('show'), 100);
+  setTimeout(() => vs.classList.add('show'), 200);
 }
 
 function updateUI() {
   questionImg.src = `images/question/q_0${current}.png`;
   leftImg.src = `images/question/q_0${current}_a.png`;
   rightImg.src = `images/question/q_0${current}_b.png`;
+
+  playAnimation();
 }
