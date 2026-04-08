@@ -14,6 +14,7 @@
     setTimeout(() => {
       // 기존 답변 초기화
       localStorage.removeItem('answers');
+      localStorage.removeItem('sessionId');
 
       window.location.href = 'index.html';
     }, 5000);

@@ -4,6 +4,7 @@ window.addEventListener('load', () => {
 
 const total = 5;
 let current = 1;
+const candidateMap = { left: 'JJISUNI', right: 'TTORA' };
 
 const questionImg = document.getElementById('questionImg');
 const leftImg = document.getElementById('leftImg');
@@ -26,6 +27,12 @@ choices.forEach(choice => {
     // 선택값 저장
     const selected = choice.dataset.choice; // 'left' 또는 'right'
     answers.push({ question: current, answer: selected });
+
+    // API 투표 제출 (fire-and-forget)
+    const sessionId = localStorage.getItem('sessionId');
+    if (sessionId) {
+      apiSubmitVote(sessionId, current, candidateMap[selected]);
+    }
 
     // 다음 문제로 넘어가기 전 클릭 막기
     choices.forEach(c => c.classList.add('disabled'));

@@ -38,32 +38,15 @@
 
 
   </main>
+  <script src="js/api.js"></script>
   <script>
-
     const storedAnswers = localStorage.getItem('answers');
     const answers = storedAnswers ? JSON.parse(storedAnswers) : [];
-
-
-    let aCount = answers.filter(item => item.answer === 'left').length;
-    let bCount = answers.filter(item => item.answer === 'right').length;
-
 
     const finalResultText = document.getElementById('finalResultText');
     const characterText = document.getElementById('characterText');
     const characterImg = document.getElementById('characterImg');
-
-    if(aCount > bCount){
-      finalResultText.innerHTML = `<img src="images/result/result_a.png" alt="A 유형">`;
-
-      characterText.src = 'images/result/juisoon_text.svg';
-      characterImg.src = 'images/result/juisoon.svg';
-
-    } else {
-      finalResultText.innerHTML = `<img src="images/result/result_b.png" alt="B 유형">`;
-
-      characterText.src = 'images/result/ttora_text.svg';
-      characterImg.src = 'images/result/ttora.svg';
-    }
+    const detailText = document.getElementById('detailText');
 
     const detailMessages = {
       1: { left: '탕수육은 무조건 찍먹파!', right: '탕수육은 무조건 부먹파!' },
@@ -73,14 +56,50 @@
       5: { left: '문자 안보네.. 신경이 쓰여...', right: '문자는.. 내가 더 안 봐 사실' }
     };
 
-    const detailText = document.getElementById('detailText');
-    let detailHTML = '';
+    function renderResult(winner) {
+      const resultImg = document.createElement('img');
+      if (winner === 'JJISUNI' || winner === 'left') {
+        resultImg.src = 'images/result/result_a.png';
+        resultImg.alt = 'A 유형';
+        characterText.src = 'images/result/juisoon_text.svg';
+        characterImg.src = 'images/result/juisoon.svg';
+      } else {
+        resultImg.src = 'images/result/result_b.png';
+        resultImg.alt = 'B 유형';
+        characterText.src = 'images/result/ttora_text.svg';
+        characterImg.src = 'images/result/ttora.svg';
+      }
+      finalResultText.textContent = '';
+      finalResultText.appendChild(resultImg);
+    }
 
+    // 상세 메시지 렌더링 (항상 localStorage 기반)
     answers.forEach(item => {
-      detailHTML += `<p>-  ${detailMessages[item.question][item.answer]}</p>`;
+      const p = document.createElement('p');
+      p.textContent = '-  ' + detailMessages[item.question][item.answer];
+      detailText.appendChild(p);
     });
 
-    detailText.innerHTML = detailHTML;
+    // API 결과 조회 → 실패 시 localStorage 폴백
+    (async function() {
+      const sessionId = localStorage.getItem('sessionId');
+      let winner = null;
+
+      if (sessionId) {
+        const apiResult = await apiGetResult(sessionId);
+        if (apiResult && apiResult.winner) {
+          winner = apiResult.winner;
+        }
+      }
+
+      if (!winner) {
+        const aCount = answers.filter(item => item.answer === 'left').length;
+        const bCount = answers.filter(item => item.answer === 'right').length;
+        winner = (aCount > bCount) ? 'left' : 'right';
+      }
+
+      renderResult(winner);
+    })();
 
     window.addEventListener('load', () => {
       document.body.classList.add('show');
